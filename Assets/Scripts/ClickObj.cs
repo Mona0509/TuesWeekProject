@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 
 public class ClickObj : MonoBehaviour
 {
+    [Label("クリック時に表示される画像")]
     [SerializeField] private List<Image> images;
+    [SerializeField] private Button button;
 
     private void Start()
     {
@@ -14,13 +17,19 @@ public class ClickObj : MonoBehaviour
             images[i].enabled = false;
         }
     }
-
-    private void OnClickPhone()
+    public void OnClickPhone()
     {
     }
-    private void OnClickEarphone()
+    public void OnClickButton()
     {
-
+        images[1].enabled = true;
+    }
+    public void OnClickHeadphone()
+    {
+        images[1].enabled = false;
+        // ヘッドホン取得
+        FlagCheck.inventory.Add(Inventory.HeadPhone);
+        Destroy(button);
     }
     private void OnClickBear()
     {
