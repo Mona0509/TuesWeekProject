@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217f0f3e53b6e12498912f61dfa732c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragAndDorpObj
+  itemObjs: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,7 +1377,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 582579816}
           m_TargetAssemblyTypeName: 
           m_MethodName: 
           m_Mode: 1
@@ -1655,6 +1656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217f0f3e53b6e12498912f61dfa732c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragAndDorpObj
+  itemObjs: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
