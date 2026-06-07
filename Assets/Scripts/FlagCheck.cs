@@ -25,36 +25,14 @@ public class FlagCheck : MonoBehaviour
     // 持ち物確認
     static public List<Inventory> inventory = new List<Inventory>();
     [Label("表示するテキスト")]
-    [SerializeField] private TextMeshProUGUI text;
-    private void InventoryFlag()
+    [HideInInspector] public TextMeshProUGUI text;
+    [SerializeField] private NextSceneLoader nextScene;
+    public void IsExitFlag()
     {
+        if (inventory.Contains(Inventory.Key))
+        {
+            nextScene.OnButtonClicked();
+        }
+    }
 
-    }
-    private void IsBearFlag()
-    {
-        switch (itemTypes)
-        {
-            case ItemTyoe.None:
-                text.text = "不満そうだ";
-                break;
-            case ItemTyoe.HeadPhone:
-                text.text = "音がでないようだ";
-                break;
-            case ItemTyoe.Phone:
-                text.text = "満足そうだ";
-                break;
-        }
-    }
-    private void IsExitFlag()
-    {
-        switch (itemTypes)
-        {
-            case ItemTyoe.None:
-                text.text = "開かない";
-                break;
-            case　ItemTyoe.Key:
-                text.text = "鍵を使った\n扉が開いた";
-                break;
-        }
-    }
 }

@@ -3,24 +3,56 @@ using UnityEngine.EventSystems;
 
 public class DragAndDorpObj : MonoBehaviour,IDropHandler
 {
+    [SerializeField] private FlagCheck flagCheck;
+    [SerializeField] private ClickObj clickObj;
     [SerializeField] private ItemObjs itemObjs;
+    [SerializeField] private GameObject haedPhone_Drag;
+    [SerializeField] private GameObject phone_Drag;
+    [SerializeField] private GameObject key_Drag;
+
+    private void Start()
+    {
+        if (FlagCheck.inventory.Contains(Inventory.Key))
+        {
+            clickObj.inventryItem[2].SetActive(false);
+            clickObj.inventryItem[1].SetActive(false);
+            clickObj.inventryItem[0].SetActive(true);
+        }
+        else
+        {
+            clickObj.inventryItem[2].SetActive(true);
+            FlagCheck.inventory.Add(Inventory.Phone);
+        }
+        if (FlagCheck.inventory.Contains(Inventory.HeadPhone))
+        {
+            clickObj.inventryItem[1].SetActive(true);
+        }
+    }
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dragObj = eventData.pointerDrag;
         itemObjs = dragObj.GetComponent<ItemObjs>();
-        FlagCheck.itemTypes = itemObjs.itemtype;
-
-        switch (FlagCheck.itemTypes)
+        if(itemObjs == null || !FlagCheck.inventory.Contains(itemObjs.inventory) )
         {
-            case ItemTyoe.HeadPhone:
-                FlagCheck.itemTypes = ItemTyoe.HeadPhone;
-                FlagCheck.inventory.Remove(Inventory.HeadPhone);
-                break;
-            case ItemTyoe.Phone:
-                FlagCheck.itemTypes = ItemTyoe.Phone;
-                FlagCheck.inventory.Remove(Inventory.Phone);
-                FlagCheck.inventory.Add(Inventory.Key);
-                break;
+            return;
+        }    
+        if(itemObjs.inventory == Inventory.HeadPhone)
+        {
+            FlagCheck.itemTypes = ItemTyoe.HeadPhone;
+            FlagCheck.inventory.Remove(Inventory.HeadPhone);
+            clickObj.inventryItem[1].SetActive(false);
+            flagCheck.text.text = "‰¹‚ª—¬‚ê‚È‚¢‚æ‚¤‚¾";
+            Debug.Log("Inventory: " + string.Join(",", FlagCheck.inventory));
+        }
+        else if(itemObjs.inventory == Inventory.Phone)
+        {
+            FlagCheck.itemTypes = ItemTyoe.Phone;
+            FlagCheck.inventory.Remove(Inventory.Phone);
+            FlagCheck.inventory.Add(Inventory.Key);
+            clickObj.inventryItem[2].SetActive(false);
+            flagCheck.text.text = "–ž‘«‚»‚¤‚¾";
+            clickObj.inventryItem[0].SetActive(true);
         }
     }
 }
+
