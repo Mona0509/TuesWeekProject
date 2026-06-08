@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &123690098
+--- !u!1 &402084458
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 123690100}
-  - component: {fileID: 123690099}
+  - component: {fileID: 402084460}
+  - component: {fileID: 402084459}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -136,30 +136,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &123690099
+--- !u!114 &402084459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123690098}
+  m_GameObject: {fileID: 402084458}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28886ed806b59e4458c93459f07113f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlagCheck
-  text: {fileID: 0}
-  nextScene: {fileID: 1176499585}
---- !u!4 &123690100
+  nextScene: {fileID: 616482351}
+--- !u!4 &402084460
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123690098}
+  m_GameObject: {fileID: 402084458}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1071.1898, y: 519.95825, z: 0}
+  m_LocalPosition: {x: 948.67566, y: 515.6121, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -687,6 +686,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4026085caa8e604db4e881a2fad56af, type: 3}
+--- !u!114 &616482351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2550489738318031785, guid: e4026085caa8e604db4e881a2fad56af, type: 3}
+  m_PrefabInstance: {fileID: 616482350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b868cc11c22c12468047841f0e06d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NextSceneLoader
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1046,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 123690099}
+      - m_Target: {fileID: 402084459}
         m_TargetAssemblyTypeName: FlagCheck, Assembly-CSharp
         m_MethodName: IsExitFlag
         m_Mode: 1
@@ -1287,4 +1297,4 @@ SceneRoots:
   - {fileID: 497923426}
   - {fileID: 616482350}
   - {fileID: 953379880}
-  - {fileID: 123690100}
+  - {fileID: 402084460}

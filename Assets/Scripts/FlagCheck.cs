@@ -1,7 +1,8 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
-using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Inventory
 {
@@ -25,14 +26,13 @@ public class FlagCheck : MonoBehaviour
     // 持ち物確認
     static public List<Inventory> inventory = new List<Inventory>();
     [Label("表示するテキスト")]
-    [HideInInspector] public TextMeshProUGUI text;
     [SerializeField] private NextSceneLoader nextScene;
+
     public void IsExitFlag()
     {
         if (inventory.Contains(Inventory.Key))
         {
-            nextScene.OnButtonClicked();
+            nextScene.OnButtonClicked(3);
         }
     }
-
 }

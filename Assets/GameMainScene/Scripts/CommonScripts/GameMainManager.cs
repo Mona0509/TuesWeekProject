@@ -11,6 +11,7 @@ public class GameMainManager : Singleton<GameMainManager>
     {
         base.Awake();
         _fadeManager = new FadeManager();
+
     }
     private void Start()
     {

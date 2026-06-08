@@ -252,6 +252,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4026085caa8e604db4e881a2fad56af, type: 3}
+--- !u!114 &467695894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2550489738318031785, guid: e4026085caa8e604db4e881a2fad56af, type: 3}
+  m_PrefabInstance: {fileID: 467695893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b868cc11c22c12468047841f0e06d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NextSceneLoader
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +768,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -14
       objectReference: {fileID: 0}
+    - target: {fileID: 3902879651852140073, guid: 67d51d2ee5331fc4a82d9fd0be4401d1, type: 3}
+      propertyPath: nextScene
+      value: 
+      objectReference: {fileID: 467695894}
     - target: {fileID: 5201583184895222269, guid: 67d51d2ee5331fc4a82d9fd0be4401d1, type: 3}
       propertyPath: _nextSceneIndex
       value: 2

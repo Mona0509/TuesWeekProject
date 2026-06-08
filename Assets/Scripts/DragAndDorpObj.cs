@@ -10,24 +10,6 @@ public class DragAndDorpObj : MonoBehaviour,IDropHandler
     [SerializeField] private GameObject phone_Drag;
     [SerializeField] private GameObject key_Drag;
 
-    private void Start()
-    {
-        if (FlagCheck.inventory.Contains(Inventory.Key))
-        {
-            clickObj.inventryItem[2].SetActive(false);
-            clickObj.inventryItem[1].SetActive(false);
-            clickObj.inventryItem[0].SetActive(true);
-        }
-        else
-        {
-            clickObj.inventryItem[2].SetActive(true);
-            FlagCheck.inventory.Add(Inventory.Phone);
-        }
-        if (FlagCheck.inventory.Contains(Inventory.HeadPhone))
-        {
-            clickObj.inventryItem[1].SetActive(true);
-        }
-    }
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dragObj = eventData.pointerDrag;
@@ -41,7 +23,7 @@ public class DragAndDorpObj : MonoBehaviour,IDropHandler
             FlagCheck.itemTypes = ItemTyoe.HeadPhone;
             FlagCheck.inventory.Remove(Inventory.HeadPhone);
             clickObj.inventryItem[1].SetActive(false);
-            flagCheck.text.text = "‰¹‚ª—¬‚ê‚È‚¢‚æ‚¤‚¾";
+            clickObj.text.text = "‰¹‚ª—¬‚ê‚È‚¢‚æ‚¤‚¾";
             Debug.Log("Inventory: " + string.Join(",", FlagCheck.inventory));
         }
         else if(itemObjs.inventory == Inventory.Phone)
@@ -50,8 +32,9 @@ public class DragAndDorpObj : MonoBehaviour,IDropHandler
             FlagCheck.inventory.Remove(Inventory.Phone);
             FlagCheck.inventory.Add(Inventory.Key);
             clickObj.inventryItem[2].SetActive(false);
-            flagCheck.text.text = "–ž‘«‚»‚¤‚¾";
+            clickObj.text.text = "–ž‘«‚»‚¤‚¾";
             clickObj.inventryItem[0].SetActive(true);
+            Debug.Log("Inventory: " + string.Join(",", FlagCheck.inventory));
         }
     }
 }
