@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CreateTiles : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CreateTiles : MonoBehaviour
     public void LayerDestory(int nowLayer)
     {
         Destroy(layerTile[nowLayer]);
+        layerTile[nowLayer] = null;
         CreateLayer(nowLayer - 1);
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3829895370183179502}
   m_Layer: 0
   m_Name: BlueTile
-  m_TagString: BuleTile
+  m_TagString: BlueTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,5 +136,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0

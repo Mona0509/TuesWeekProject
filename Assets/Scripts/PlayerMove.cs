@@ -8,34 +8,45 @@ public class PlayerMove : MonoBehaviour
     int layer = 0;
     [SerializeField] ItemManager itemManager;
     static public bool isClear = false;
-
     private string currentTileTag;
     [SerializeField] private LayerManager layerManager;
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         currentTileTag = collision.tag;
+
+        Debug.Log(
+            "Player=" + transform.position +
+            " Hit=" + collision.name +
+            " TilePos=" + collision.transform.position +
+            " Tag=" + collision.tag
+        );
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         currentTileTag = "";
     }
+
+
+    public void OnDestroyButton()
+    {
+        layer = layerManager.LayerDestroy(layer);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W)) y += 1;
         if (Input.GetKeyDown(KeyCode.S)) y -= 1;
         if (Input.GetKeyDown(KeyCode.A)) x -= 1;
         if (Input.GetKeyDown(KeyCode.D)) x += 1;
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            /*
-            if(currentTileTag == "Key")
+            if (itemManager.door.activeSelf && itemManager.key.activeSelf)
             {
                 isClear = true;
-                itemManager.ItemSet();
             }
-            */
-            if(currentTileTag == "Door")
+            if (currentTileTag == "Door")
             {
                 layerManager.TryClear(isClear);
             }
@@ -43,16 +54,19 @@ public class PlayerMove : MonoBehaviour
             {
                 layer = layerManager.TryLayerChangeUp(layer);
             }
-            else if (currentTileTag == "BlueTile")
+            if (currentTileTag == "BlueTile")
             {
                 layer = layerManager.TryLayerChangeDown(layer);
             }
         }
+        x = Mathf.Clamp(x, -2, 2);
+        y = Mathf.Clamp(y, -2, 2);
+
         UpdatePosition();
     }
 
     void UpdatePosition()
     {
-        transform.position = new Vector3(x, y, layer);
+        transform.position = new Vector2(x, y);
     }
 }
