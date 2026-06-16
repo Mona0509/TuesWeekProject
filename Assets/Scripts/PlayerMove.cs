@@ -15,13 +15,6 @@ public class PlayerMove : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         currentTileTag = collision.tag;
-
-        Debug.Log(
-            "Player=" + transform.position +
-            " Hit=" + collision.name +
-            " TilePos=" + collision.transform.position +
-            " Tag=" + collision.tag
-        );
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
