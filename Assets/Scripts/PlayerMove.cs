@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 using static UnityEngine.CullingGroup;
 
@@ -30,8 +31,10 @@ public class PlayerMove : MonoBehaviour
     {
         mousePos = Input.mousePosition;
         worldPos = Camera.main.ScreenToWorldPoint(new Vector2(mousePos.x,mousePos.y));
-        //transform.position = new Mathf.Clamp(worldPos,9.33f,4.86f);
+        float x = Mathf.Clamp(worldPos.x, -9.33f, 9.33f);
+        float y = Mathf.Clamp(worldPos.y,-4.86f, 4.86f);
         transform.position = worldPos;
+        transform.position = new Vector3(x, y, transform.position.z);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -85,7 +88,7 @@ public class PlayerMove : MonoBehaviour
         --playerHP;
         if(playerHP <= 0)
         {
-            Debug.Log("GameOver");
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 

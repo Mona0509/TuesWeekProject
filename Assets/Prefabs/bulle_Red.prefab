@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3135391973797079918}
   - component: {fileID: 5392028640164282424}
   - component: {fileID: 5853292012534350080}
-  - component: {fileID: 5133380076847310451}
+  - component: {fileID: 8809720154848229203}
+  - component: {fileID: -6533697074610412517}
   m_Layer: 0
   m_Name: bulle_Red
   m_TagString: Red
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +130,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &5133380076847310451
+--- !u!114 &8809720154848229203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +139,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1508828273834985616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e4910fb626c114e8e485c842b6c4af, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a3059b1b5599e5468ae138bd818afa1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulleCreate
-  bulle_Red: {fileID: 1508828273834985616}
+  m_EditorClassIdentifier: Assembly-CSharp::BulleMove
   speed: 5
+--- !u!50 &-6533697074610412517
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508828273834985616}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
