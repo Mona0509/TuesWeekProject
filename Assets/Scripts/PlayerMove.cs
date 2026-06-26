@@ -1,23 +1,25 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    Vector3 vec3;
-    [SerializeField] private float speed = 1;
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float followSpeed = 3.0f;
+    private Vector3 targetPos;
 
-    public void OnMove(InputValue value)
+    private void Start()
     {
-        var axis = value.Get<Vector2>();
-        vec3 = new Vector3 (axis.x, 0, axis.y);
+        targetPos = transform.position;
     }
-
-    void Update()
+    private void Update()
     {
-        transform.position += vec3 * speed * Time.deltaTime;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            targetPos = new Vector3 (hit.point.x,this.transform.position.y, hit.point.z);
+        }
+        transform.position = Vector3.MoveTowards(
+        transform.position,
+        targetPos,
+        followSpeed * Time.deltaTime);
     }
 }
