@@ -21,5 +21,15 @@ public class PlayerMove : MonoBehaviour
         transform.position,
         targetPos,
         followSpeed * Time.deltaTime);
+
+        Vector3 dir = targetPos - transform.position;
+
+        dir.y = 0;
+
+        if (dir.sqrMagnitude > 0.001f)
+        {
+            transform.rotation =
+                Quaternion.LookRotation(dir) * Quaternion.Euler(90, 0, 0);
+        }
     }
 }
