@@ -3,11 +3,13 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float followSpeed = 3.0f;
+    float pos;
     private Vector3 targetPos;
 
     private void Start()
     {
         targetPos = transform.position;
+        pos = transform.position.y;
     }
     private void Update()
     {
@@ -25,6 +27,10 @@ public class PlayerMove : MonoBehaviour
         Vector3 dir = targetPos - transform.position;
 
         dir.y = 0;
+
+        Vector3 pos = transform.position;
+        pos.y = 1;
+        transform.position = pos;
 
         if (dir.sqrMagnitude > 0.001f)
         {
