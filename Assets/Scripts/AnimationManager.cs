@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
-    Animator animator;
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    [SerializeField] private Animator animator;
 
-    // Update is called once per frame
-    void Update()
+    public void TextMoveDummy()
     {
-        
+        animator.SetTrigger("Move");
     }
 }

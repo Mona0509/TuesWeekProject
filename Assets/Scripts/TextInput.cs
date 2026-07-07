@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TextInput : MonoBehaviour
 {
+    [SerializeField] private AnimationManager animator;
     [SerializeField] private TMP_InputField input;
     [SerializeField] private List<TextMeshProUGUI> inputText;
     [SerializeField] private List<TextMeshProUGUI> clearText;
@@ -29,8 +30,11 @@ public class TextInput : MonoBehaviour
         }
         inputText[clickCount].enabled = true;
     }
+
+
     public void IsTextClick()
     {
+        animator.TextMoveDummy();
         clickCount++;
         if (clickCount == 5)
         {
