@@ -4,8 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] private GameObject castle;
+    [SerializeField] private Transform castle;
     [SerializeField] private float speed = 3f;
+
+    private void Start()
+    {
+        castle = GameObject.FindGameObjectWithTag("Castle").GetComponent<Transform>();
+    }
     void Update()
     {
         Vector3 dir = (castle.transform.position - transform.position).normalized;
