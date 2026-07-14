@@ -7,6 +7,7 @@ public class CardScore : MonoBehaviour
     [SerializeField] private CardAttack attack;
     // 場に出すカードのクリック数
     private int clickCount = 0;
+    private GameObject setObj;
 
     // 最大値と最小値
     static public int maxCard = 3;
@@ -28,14 +29,14 @@ public class CardScore : MonoBehaviour
         create.Create();
         if (clickCount == 2)
         {
-           // SetCard();
+            SetCard();
         }
     }
 
     // カードを場に出す
-    private void SetCard(int setCard)
+    private void SetCard()
     {
-
+        setObj = gameObject;
     }
 
     // ターン終了時
@@ -44,8 +45,9 @@ public class CardScore : MonoBehaviour
         if(maxCard <= cardScore)
         {
             maxCard = cardScore;
+            minCard = maxCard - 2;
         }
-        attack.Attack(scoreManager.score);
+        attack.Attack(scoreManager.score, setObj);
     }
     private void ScoreChenge(int setNum)
     {
