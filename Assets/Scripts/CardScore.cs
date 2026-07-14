@@ -22,21 +22,22 @@ public class CardScore : MonoBehaviour
 
 
     // ターン開始
+    // EventTriggerで取得する
     public void TurnStart()
     {
         // カード生成
         if (isLastAttack) return;
-        create.Create();
-        if (clickCount == 2)
-        {
-            SetCard();
-        }
     }
 
     // カードを場に出す
-    private void SetCard()
+    private void SetCard(GameObject obj)
     {
-        setObj = gameObject;
+        clickCount++;
+        if (clickCount == 2)
+        {
+            clickCount = 0;
+            setObj = obj;
+        }
     }
 
     // ターン終了時
