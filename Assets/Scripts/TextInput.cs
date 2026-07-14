@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TextInput : MonoBehaviour
@@ -59,18 +60,23 @@ public class TextInput : MonoBehaviour
         if (count == 0) isClear = true;
         if (!isClear) return count;
 
+        animator.Answer();
         inputText[count].enabled = false;
         dummyText[count].enabled = false;
         count++;
-        NextText(count);
+        if (count == 2) SceneManager.LoadScene("ClearScene");
+        else NextText(count);
         return count;
     }
 
     private void NextText(int count)
     {
-        isClear = false;
-        dummyText[count].enabled = true;
-        inputText[count].enabled = true;
-        input.text = "";
+        {
+            isClear = false;
+            dummyText[count].enabled = true;
+            inputText[count].enabled = true;
+            input.text = "";
+        }
+        ;
     }
 }
