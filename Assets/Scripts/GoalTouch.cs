@@ -2,23 +2,33 @@ using UnityEngine;
 
 public class GoalTouch : MonoBehaviour
 {
-    Collider2D collder2D;
-    NotesMove notes;
-    GoalCheck goalCheck;
-    private void Start()
-    {
-        collder2D = GetComponent<Collider2D>();
-        notes = GetComponentInParent<NotesMove>();
-        goalCheck = GetComponentInParent<GoalCheck>();
-    }
+    NotesMove notesMove;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    RaycastHit2D hit;
+    GameObject notesObj;
+    [SerializeField] private LayerMask notesLayer;
+    private void Update()
     {
-        if (collision.CompareTag("Goal") && notes.isTouchCheck) goalCheck.isGoal++;
-    }
+        Debug.DrawRay(transform.position, transform.right * 10f, Color.blue);
+        hit = Physics2D.Raycast(transform.position,
+                                  transform.right,
+                                  10.0f,
+                                  notesLayer);
+        notesObj = hit.transform.gameObject;
 
-    private void OnTriggerExit2D(Collider2D collision)
+        if (hit.collider != null)
+        {
+            notesObj = hit.collider.gameObject;
+            Debug.Log("Hit : " + notesObj.name);
+        }
+        else
+        {
+            Debug.Log("Hit‚È‚µ");
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Goal") && notes.isTouchCheck) goalCheck.isGoal--;
+        notesMove = notesObj.GetComponent<NotesMove>();
+        notesMove.isBreak = true;
     }
 }

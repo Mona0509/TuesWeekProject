@@ -2,35 +2,52 @@ using UnityEngine;
 
 public class GoalCheck : MonoBehaviour
 {
-    //private Transform goalObj;
     [SerializeField] private LayerMask GoalLayer;
-    [HideInInspector] public int isGoal = 0;
+    NotesMove notesMove;
     private void Start()
     {
-        //goalObj = GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>();
+        notesMove = GetComponentInParent<NotesMove>();
     }
-
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, GoalLayer);
-
-        Debug.Log(hit);
-
-        if (Input.GetKeyDown(KeyCode.Space) && hit)
+       if (Input.GetKeyDown(KeyCode.Space) && notesMove.isBreak)
         {
             isClear();
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Goal")) 
+        {
+            notesMove.isGoal++;
+        }
+        else if (collision.CompareTag("MissAear"))
+        {
+            Debug.Log("ミス");
+            ClickMiss();
+            Destroy(transform.parent.gameObject);
+        }
+    }
     private void isClear()
     {
-        if(isGoal <= 2)
+        if(notesMove.isGoal == 2)
         {
-            Destroy(gameObject);
+            Debug.Log("パーフェクト");
+            Destroy(transform.parent.gameObject);
             GameManager.Instance.score = 5.0f * GameManager.Instance.combo;
+            GameManager.Instance.combo += 0.1f;
+        }
+        else if (notesMove.isGoal == 1)
+        {
+            Debug.Log("ノーマル");
+            Destroy(transform.parent.gameObject);
+            GameManager.Instance.score = 2.5f * GameManager.Instance.combo;
             GameManager.Instance.combo += 0.1f;
         }
         else
         {
+            Debug.Log("ミス");
             ClickMiss();
             Destroy(gameObject);
         }
