@@ -4,9 +4,11 @@ public class GoalCheck : MonoBehaviour
 {
     [SerializeField] private LayerMask GoalLayer;
     NotesMove notesMove;
+    ScoreText scoreText;
     private void Start()
     {
         notesMove = GetComponentInParent<NotesMove>();
+        scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<ScoreText>();
     }
     private void Update()
     {
@@ -31,12 +33,14 @@ public class GoalCheck : MonoBehaviour
     }
     private void isClear()
     {
-        if(notesMove.isGoal == 2)
+        int textCheck;
+        if (notesMove.isGoal == 2)
         {
             Debug.Log("パーフェクト");
             Destroy(transform.parent.gameObject);
             GameManager.Instance.score = 5.0f * GameManager.Instance.combo;
             GameManager.Instance.combo += 0.1f;
+            textCheck = notesMove.isGoal;
         }
         else if (notesMove.isGoal == 1)
         {
@@ -44,13 +48,16 @@ public class GoalCheck : MonoBehaviour
             Destroy(transform.parent.gameObject);
             GameManager.Instance.score = 2.5f * GameManager.Instance.combo;
             GameManager.Instance.combo += 0.1f;
+            textCheck = notesMove.isGoal;
         }
         else
         {
             Debug.Log("ミス");
             ClickMiss();
             Destroy(gameObject);
+            textCheck = 0;
         }
+        scoreText.ScoreTextUpdate(textCheck);
     }
     private void ClickMiss()
     {

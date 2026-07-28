@@ -9,21 +9,16 @@ public class GoalTouch : MonoBehaviour
     [SerializeField] private LayerMask notesLayer;
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.right * 10f, Color.blue);
         hit = Physics2D.Raycast(transform.position,
                                   transform.right,
                                   10.0f,
                                   notesLayer);
-        notesObj = hit.transform.gameObject;
+        if (!hit) return;
 
         if (hit.collider != null)
         {
+            notesObj = hit.transform.gameObject;
             notesObj = hit.collider.gameObject;
-            Debug.Log("Hit : " + notesObj.name);
-        }
-        else
-        {
-            Debug.Log("Hit‚È‚µ");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
