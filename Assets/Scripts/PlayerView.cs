@@ -1,10 +1,16 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine.SceneManagement;
 
 public class PlayerView : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent nav;
+
+    [Scene]
+    [SerializeField] private string sceneName;
+
+
 
     void Update()
     {
@@ -27,6 +33,14 @@ public class PlayerView : MonoBehaviour
             {
                 nav.SetDestination(navHit.position);
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            SceneManager.LoadScene(sceneName);
         }
     }
 }
