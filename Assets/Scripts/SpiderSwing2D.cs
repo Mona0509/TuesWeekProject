@@ -6,10 +6,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpringJoint2D))]
 
+// 横スクロールアクション
+// ワイヤー移動
+// 弾がワイヤーにあたったら斬る
+// Playerが画面下に落ちた、弾に3回当たったらゲームオーバー
+
 public class SpiderSwing2D : MonoBehaviour
 {
     [Header("設定")]
     [SerializeField] private LayerMask _grappleLayer;  // 糸をつけることができるレイヤー
+    [SerializeField] private LayerMask _attackLayer;   // 糸が斬れるレイヤー
     [SerializeField] private float _maxDistance = 15f; // 糸の最大距離
 
     private Rigidbody2D _rigidbody2D;
@@ -18,13 +24,18 @@ public class SpiderSwing2D : MonoBehaviour
     private PlayerInput _playerInput;
     private InputAction _shootWebAction;
     private InputAction _lineScaleAction;
+    private LineRenderer _lineRenderer;
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _springJoint2D = GetComponent<SpringJoint2D>();
+        _lineRenderer = GetComponent<LineRenderer>();
         _mainCamera = Camera.main;
         _springJoint2D.enabled = false; // 初期状態では糸を無効化
+        _lineRenderer.enabled = false; // 初期状態ではラインレンダラーを無効化
+        _lineRenderer.startWidth = 0.1f;
+        _lineRenderer.endWidth = 0.1f;
 
         _playerInput = GetComponent<PlayerInput>();
         _shootWebAction = _playerInput.actions["MouseLeft"];
@@ -57,6 +68,16 @@ public class SpiderSwing2D : MonoBehaviour
                                 _maxDistance); // 糸の距離を1から_maxDistanceの範囲に制限
             }
         }
+
+        if (!_lineRenderer.enabled) return;
+        _lineRenderer.SetPosition(0, transform.position);
+        if(Physics2D.Raycast(transform.position,
+                             _lineRenderer.GetPosition(1) - transform.position,
+                             _maxDistance,
+                             _attackLayer))
+        {
+            ReleaseWeb();
+        }
     }
 
     private void ShootWeb()
@@ -78,6 +99,8 @@ public class SpiderSwing2D : MonoBehaviour
         {
             // 糸を有効化
             _springJoint2D.enabled = true;
+            _lineRenderer.SetPosition(1, hit.point);
+            _lineRenderer.enabled = true;
             // 糸の接続点を設定
             _springJoint2D.connectedAnchor = hit.point;
             // 糸の距離を設定
@@ -91,5 +114,6 @@ public class SpiderSwing2D : MonoBehaviour
     private void ReleaseWeb()
     {
         _springJoint2D.enabled = false; // 糸を無効化
+        _lineRenderer.enabled = false; // ラインレンダラーを無効化
     }
 }
