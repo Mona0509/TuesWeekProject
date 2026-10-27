@@ -1,6 +1,8 @@
+using NaughtyAttributes;
 using NaughtyAttributes.Test;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // Rigitbody2DとSpringJoint2Dコンポーネントを必須にする
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,6 +19,9 @@ public class SpiderSwing2D : MonoBehaviour
     [SerializeField] private LayerMask _grappleLayer;  // 糸をつけることができるレイヤー
     [SerializeField] private LayerMask _attackLayer;   // 糸が斬れるレイヤー
     [SerializeField] private float _maxDistance = 15f; // 糸の最大距離
+
+    [Scene]
+    [SerializeField] private string gameOverScene;
 
     private Rigidbody2D _rigidbody2D;
     private SpringJoint2D _springJoint2D;
@@ -115,5 +120,11 @@ public class SpiderSwing2D : MonoBehaviour
     {
         _springJoint2D.enabled = false; // 糸を無効化
         _lineRenderer.enabled = false; // ラインレンダラーを無効化
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer != _attackLayer) return;
+        SceneManager.LoadScene(gameOverScene);
     }
 }
